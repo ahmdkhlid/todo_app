@@ -6,6 +6,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:udemy_projects/modules/todo_app/archived_tasks/archived_tasks_screen.dart';
 import 'package:udemy_projects/modules/todo_app/done_tasks/done_tasks_screen.dart';
 import 'package:udemy_projects/modules/todo_app/new_tasks/new_tasks_screen.dart';
+import 'package:udemy_projects/shared/network/local/cache_helper.dart';
 
 // import 'package:udemy_projects/shared/components/constants.dart';
 
@@ -148,5 +149,19 @@ class AppCubit extends Cubit<AppStates> {
     isBottomSheetShown = isShow;
     fabIcon = icon;
     emit(AppChangeBottomNavSheetState());
+  }
+
+  bool isDark = false;
+
+  void changeAppMode({bool fromShared}) {
+    if (fromShared != null) {
+      isDark = fromShared;
+      emit(AppChangeThemeMode());
+    } else {
+      isDark = !isDark;
+      CacheHelper.putBoolean(key: 'isDark', value: isDark).then((value) {
+        emit(AppChangeThemeMode());
+      });
+    }
   }
 }

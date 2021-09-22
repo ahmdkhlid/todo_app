@@ -3,13 +3,7 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:udemy_projects/all_app_cubit/cubit.dart';
-//import 'package:sqflite/sqflite.dart';
-// import 'package:udemy_projects/modules/archived_tasks/archived_tasks_screen.dart';
-// import 'package:udemy_projects/modules/done_tasks/done_tasks_screen.dart';
-// import 'package:udemy_projects/modules/new_tasks/new_tasks_screen.dart';
 import 'package:udemy_projects/shared/components/components.dart';
-// import 'package:udemy_projects/shared/components/constants.dart';
 import 'package:udemy_projects/shared/cubit/cubit.dart';
 import 'package:udemy_projects/shared/cubit/states.dart';
 
@@ -38,17 +32,23 @@ class HomeLayout extends StatelessWidget {
             key: scaffoldKey,
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              backgroundColor: Colors.indigo.shade300,
+              backgroundColor: Colors.white,
+              elevation: 0.5,
               title: Text(
                 cubit.titles[cubit.currentIndex],
               ),
-              actions: [
-                IconButton(
-                    onPressed: () {
-                      AllAppCubit.get(context).changeAppMode();
-                    },
-                    icon: Icon(Icons.dark_mode_outlined))
-              ],
+              titleTextStyle: TextStyle(
+                  fontSize: 32.0,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.teal,
+                  fontFamily: 'Aladin'),
+              // actions: [
+              //   IconButton(
+              //       onPressed: () {
+              //         AppCubit.get(context).changeAppMode();
+              //       },
+              //       icon: Icon(Icons.dark_mode_outlined))
+              // ],
             ),
             body: ConditionalBuilder(
               condition: state is! AppCreateDatabaseLoadingState,
@@ -58,7 +58,7 @@ class HomeLayout extends StatelessWidget {
               ),
             ),
             floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.indigo,
+              backgroundColor: Colors.teal,
               onPressed: () {
                 if (cubit.isBottomSheetShown) {
                   if (formKey.currentState.validate()) {
@@ -164,6 +164,7 @@ class HomeLayout extends StatelessWidget {
               },
               child: Icon(
                 cubit.fabIcon,
+                color: Colors.white,
               ),
               elevation: 3.0,
               tooltip: 'Add New Task',
@@ -173,8 +174,8 @@ class HomeLayout extends StatelessWidget {
             bottomNavigationBar: BottomAppBar(
               shape: CircularNotchedRectangle(),
               notchMargin: 4.0,
-              elevation: 2.0,
-              color: Colors.indigo.shade100,
+              elevation: 10.0,
+              color: Colors.white,
               child: Container(
                 padding: EdgeInsets.only(top: 17.0),
                 height: 85,
@@ -185,7 +186,7 @@ class HomeLayout extends StatelessWidget {
                   onTap: (index) {
                     cubit.changeIndex(index);
                   },
-                  selectedItemColor: Colors.indigo,
+                  selectedItemColor: Colors.teal,
                   iconSize: 25.0,
                   type: BottomNavigationBarType.fixed,
                   items: [

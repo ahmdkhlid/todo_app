@@ -124,41 +124,46 @@ Widget defaultTaskItem(
               child: Row(
                 children: [
                   CircleAvatar(
-                    backgroundColor: Colors.indigo.shade100,
+                    backgroundColor: Colors.teal,
                     radius: 30.0,
                     child: Text(
                       '${model['time']}',
                       style: TextStyle(
-                          fontSize: 15.0, fontWeight: FontWeight.bold),
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                   const SizedBox(
                     width: 15.0,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        '${model['title']}',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          '${model['title']}',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 5.0,
-                      ),
-                      Text(
-                        '${model['date']}',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.normal,
+                        const SizedBox(
+                          height: 5.0,
                         ),
-                      ),
-                    ],
+                        Text(
+                          '${model['date']}',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   // const SizedBox(
                   //   width: 25.0,
@@ -177,7 +182,7 @@ Widget defaultTaskItem(
                               );
                             },
                             icon: Icon(Icons.check_circle_outline),
-                            color: Colors.black45,
+                            color: Colors.teal,
                           ),
                           const SizedBox(
                             width: 10.0,
@@ -190,17 +195,7 @@ Widget defaultTaskItem(
                               );
                             },
                             icon: Icon(Icons.archive_outlined),
-                            color: Colors.black45,
-                          ),
-                          const SizedBox(
-                            width: 10.0,
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              AppCubit.get(context).deleteData(id: model['id']);
-                            },
-                            icon: Icon(Icons.delete),
-                            color: Colors.black45,
+                            color: Colors.teal,
                           ),
                         ],
                       ),

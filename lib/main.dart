@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_projects/modules/todo_app/new_tasks/new_tasks_screen.dart';
 import 'package:udemy_projects/shared/bloc_observer.dart';
+import 'package:udemy_projects/shared/cubit/cubit.dart';
+import 'package:udemy_projects/shared/cubit/states.dart';
 import 'package:udemy_projects/shared/network/remote/dio_helper.dart';
 
-import 'all_app_cubit/cubit.dart';
-import 'all_app_cubit/states.dart';
+import 'layout/todo_app/todo_layout.dart';
 import 'shared/network/local/cache_helper.dart';
 import 'shared/styles/themes.dart';
 
@@ -37,8 +38,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => AllAppCubit(),
-      child: BlocConsumer<AllAppCubit, AllAppStates>(
+      create: (BuildContext context) => AppCubit(),
+      child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
           return MaterialApp(
@@ -46,8 +47,9 @@ class MyApp extends StatelessWidget {
             darkTheme: darkTheme,
             debugShowCheckedModeBanner: false,
             title: 'Flutter ',
-            themeMode: ThemeMode.light,
-            home: NewTasksScreen(),
+            themeMode:
+                AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
+            home: HomeLayout(),
           );
         },
       ),
